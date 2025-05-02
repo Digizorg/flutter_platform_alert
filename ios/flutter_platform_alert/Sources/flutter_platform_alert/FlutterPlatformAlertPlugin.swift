@@ -177,6 +177,11 @@ public class FlutterPlatformAlertPlugin: NSObject, FlutterPlugin {
         }
         controller.addAction(action)
       }
+      if preferredStyle == .actionSheet, let popover = controller.popoverPresentationController {
+        popover.sourceView = root.view
+        popover.sourceRect = CGRect(x: root.view.bounds.midX, y: root.view.bounds.midY, width: 0, height: 0)
+        popover.permittedArrowDirections = []
+      }
       root.present(controller, animated: true)
 
     case "showCustomAlert":
@@ -226,6 +231,11 @@ public class FlutterPlatformAlertPlugin: NSObject, FlutterPlugin {
         title: windowTitle, message: text, preferredStyle: preferredStyle)
       for action in actions {
         controller.addAction(action)
+      }
+      if preferredStyle == .actionSheet, let popover = controller.popoverPresentationController {
+        popover.sourceView = root.view
+        popover.sourceRect = CGRect(x: root.view.bounds.midX, y: root.view.bounds.midY, width: 0, height: 0)
+        popover.permittedArrowDirections = []
       }
       root.present(controller, animated: true)
 
