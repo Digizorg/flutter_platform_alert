@@ -105,8 +105,8 @@ class FlutterPlatformAlert {
   /// property in the [options] parameter to true.
   ///
   static Future<CustomButton> showCustomAlert({
-    required String windowTitle,
-    required String text,
+    String? windowTitle,
+    String? text,
     IconStyle iconStyle = IconStyle.none,
     String? positiveButtonTitle,
     String? negativeButtonTitle,

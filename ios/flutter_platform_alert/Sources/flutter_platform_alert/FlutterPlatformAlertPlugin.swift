@@ -159,8 +159,8 @@ public class FlutterPlatformAlertPlugin: NSObject, FlutterPlugin {
             code: "-100", message: "No arguments", details: "The arguments object is nil"))
         return
       }
-      let windowTitle = args["windowTitle"] as? String ?? ""
-      let text = args["text"] as? String ?? ""
+      let windowTitle = args["windowTitle"] as? String
+      let text = args["text"] as? String
       let alertStyleString = args["alertStyle"] as? String ?? ""
       let alertStyle =
         FlutterPlatformAlertStyle(rawValue: alertStyleString) ?? FlutterPlatformAlertStyle.ok
@@ -190,8 +190,8 @@ public class FlutterPlatformAlertPlugin: NSObject, FlutterPlugin {
             code: "-100", message: "No arguments", details: "The arguments object is nil"))
         return
       }
-      let windowTitle = args["windowTitle"] as? String ?? ""
-      let text = args["text"] as? String ?? ""
+      let windowTitle = args["windowTitle"] as? String
+      let text = args["text"] as? String
 
       var actions = [UIAlertAction]()
       if let positiveButton = args["positiveButtonTitle"] as? String,
