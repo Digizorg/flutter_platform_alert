@@ -41,14 +41,17 @@ class FlutterPlatformAlertPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
         if (args == null) {
           result.error("No args", "Args is a null object.", "")
         } else {
-          val windowTitle = args["windowTitle"] ?: ""
-          val text = args["text"] ?: ""
+          val windowTitle: String? = args["windowTitle"]
+          val text: String? = args["text"]
           val alertStyle = args["alertStyle"] ?: "ok"
 
           AlertDialog.Builder(
             this.activity,
             getDialogStyle()
-          ).setTitle(windowTitle).setMessage(text).apply {
+          ).apply {
+            windowTitle?.let { setTitle(it) }
+            text?.let { setMessage(it) }
+          }.apply {
             when (alertStyle) {
               "abortRetryIgnore" ->
                 setPositiveButton(R.string.retry) { _, _ -> result.success("retry") }
@@ -81,8 +84,8 @@ class FlutterPlatformAlertPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
         if (args == null) {
           result.error("No args", "Args is a null object.", "")
         } else {
-          val windowTitle = args["windowTitle"] ?: ""
-          val text = args["text"] ?: ""
+          val windowTitle: String? = args["windowTitle"]
+          val text: String? = args["text"]
           val positiveButtonTitle = args["positiveButtonTitle"] ?: ""
           val negativeButtonTitle = args["negativeButtonTitle"] ?: ""
           val neutralButtonTitle = args["neutralButtonTitle"] ?: ""
@@ -91,7 +94,10 @@ class FlutterPlatformAlertPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
           val builder = AlertDialog.Builder(
             this.activity,
             getDialogStyle()
-          ).setTitle(windowTitle).setMessage(text)
+          ).apply {
+            windowTitle?.let { setTitle(it) }
+            text?.let { setMessage(it) }
+          }
           var buttonCount = 0
           if (positiveButtonTitle.isNotEmpty()) {
             builder.setPositiveButton(positiveButtonTitle) { _, _ -> result.success("positive_button") }
